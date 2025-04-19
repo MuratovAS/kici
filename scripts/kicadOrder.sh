@@ -37,7 +37,7 @@ git config --global advice.detachedHead false
 git fetch --prune --unshallow --tags
 git checkout $PRJ_VERSION_CUR
 
-BOMVERIFIERARG="$BOMVERIFIERARG -qty=$SMTQTY" PRJ_VERSION=$PRJ_VERSION_CUR KIPRJ_DIR_ARRAY=$KIPRJ_DIR_CUR ./kicadStock.sh
+BOMVERIFIERARG="$BOMVERIFIERARG -qty=$SMTQTY" PRJ_VERSION=$PRJ_VERSION_CUR KIPRJ_DIR_ARRAY=$KIPRJ_DIR_CUR kicadStock.sh
 
 SMTTYPENEG="both"
 if [ "$SMTTYPE" = "top" ]; then SMTTYPENEG="bottom"; elif [ "$SMTTYPE" = "bottom" ]; then SMTTYPENEG="top"; elif [ "$SMTTYPE" = "both" ]; then SMTTYPENEG="no"; elif [ "$SMTTYPE" = "no" ]; then SMTTYPENEG="both"; fi
