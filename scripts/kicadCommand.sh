@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # kicadCommand.sh index.md
 
@@ -13,14 +13,14 @@ for KIPRJ_DIR in $KIPRJ_DIR_ARRAY; do
     echo "WARN: Skip folder ${TARGET_DIR}";
     continue;
   fi;
-  cat $CMDFILE | sed -i 's/\r//g' | grep "^/" | while read line || [[ -n $line ]];
+  cat $CMDFILE | sed 's/\r//g' | grep "^/" | while read line || [[ -n $line ]];
   do
     set -- $line; 
     case $1 in
       "/CHG")
         if [[ -n "$2" && -n "$3" && -z "$4" ]]; then
-          echo "CHG $2 -> $3";
-          sed -i -z "s@\"$3\"@\"$2\"@g" ${TARGET_DIR}/*.kicad_*
+          echo "CHG $2 -> $3 in '${TARGET_DIR}/*.kicad_*'";
+          sed -i -z "s@\"$2\"@\"$3\"@g" ${TARGET_DIR}/*.kicad_*
         else
           echo "Incorrect number of arguments: $1"
         fi
