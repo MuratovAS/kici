@@ -1,0 +1,17 @@
+# General
+*.bck
+*.bak
+﻿.~*
+_autosave-*
+*/#auto_saved_files#
+*/*-backups/*
+
+build
+
+# Drawio
+*.bkp
+*.dtmp
+
+#Python
+__pycache__/
+*.py[cod]
