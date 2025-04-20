@@ -102,6 +102,11 @@ I recommend specifying the exact version of the docker image in the pipeline.
 
 ## Changelog:
 
+### v9.0.1
+
+- Add PROPHIDE, PROPEDIT in kicad-command
+- Add PROPEDIT in kicad-stock
+
 ### v9.0.0
 
 - Init

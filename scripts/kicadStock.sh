@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-# BOMVERIFIERARG="-qty=1 -lcsc=sku -lcscRW=pn -promelec -elitan" PREVCOLUMN="qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock,promelec_consistent,promelec_stock,elitan_consistent,elitan_enough" ./kicadStock.sh
+# BOMVERIFIERARG="-qty=1 -lcsc=sku -lcscRW=pn -promelec -elitan" PREVCOLUMN="qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock,promelec_consistent,promelec_stock,elitan_consistent,elitan_enough" ./kicadStock.sh schPropEdit
 
 PRJ_VERSION=${PRJ_VERSION:-"v0.0.0-def"}
 PRJ_REPO=${PRJ_REPO:-"repo"}
@@ -54,4 +54,25 @@ for KIPRJ_DIR in $KIPRJ_DIR_ARRAY; do
     | sed "s/\",\"/;/g" | sed 's/^"//' | sed 's/"$//' | sed "s/_consistent/_ok/g"| LANG=C sed "s/[\x80-\xFF]/#/g" | column -t -s ";" -R 2 -o ' | ' \
     | sed "s/True/✅  /g" | sed "s/False/❌   /g";
   fi
+
+  if [[ "$1" != "schPropEdit" ]]; then
+     continue;
+  fi
+   
+  python3 /tools/csvExtractor.py ${OUTPUT_DIR}/${NAME}_bom_stock.csv "lcsc,pn" | sed "s/,/ /g" | while read line || [[ -n $line ]];
+  do
+    set -- $line; 
+    SEARCH_VALUE=`echo $1 | sed 's/^"//' | sed 's/"$//'`
+    CHANGE_VALUE=`echo $2 | sed 's/^"//' | sed 's/"$//'`
+
+    if [[ ! -n "$SEARCH_VALUE" || ! -n "$CHANGE_VALUE" || "$SEARCH_VALUE" = "lcsc" ]]; then
+       # echo "skip row"
+       continue;
+    fi
+    
+    for SCH_FILE in ${TARGET_DIR}/*.kicad_sch; do
+      echo "schPropEdit - pn:$CHANGE_VALUE for lcsc:$SEARCH_VALUE in $SCH_FILE"
+      python3 /tools/schPropEdit.py ${SCH_FILE} --search_name lcsc --search_value $SEARCH_VALUE --change_name pn --change_value $CHANGE_VALUE
+    done
+  done
 done

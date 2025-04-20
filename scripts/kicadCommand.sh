@@ -25,6 +25,27 @@ for KIPRJ_DIR in $KIPRJ_DIR_ARRAY; do
           echo "Incorrect number of arguments: $1"
         fi
         ;;
+      "/PROPHIDE")
+        if [[ -n "$2" && -z "$3" ]]; then
+          echo "PROPHIDE $2 in '${TARGET_DIR}/*.kicad_sch'";
+          for SCH_FILE in ${TARGET_DIR}/*.kicad_sch; do
+            python3 /tools/schPropHide.py ${SCH_FILE} $2 yes
+          done
+        else
+          echo "Incorrect number of arguments: $1"
+        fi
+        ;;
+      "/PROPEDIT")
+        if [[ -n "$2" && -n "$3" && -n "$4" && -n "$5" && -z "$6"  ]]; then
+          echo "PROPEDIT $2 in '${TARGET_DIR}/*.kicad_sch'";
+          for SCH_FILE in ${TARGET_DIR}/*.kicad_sch; do
+            python3 /tools/schPropEdit.py ${SCH_FILE} --search_name $2 --search_value $3 --change_name $4 --change_value $5
+          done
+        else
+          echo "Incorrect number of arguments: $1"
+        fi
+        ;;
+
       *)
         echo "Unknown operation: $1"
         ;;
