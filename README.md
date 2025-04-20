@@ -13,6 +13,12 @@ I work with two platforms `github`, `gitea`
 ## Features
 
 - `kicad-command` - Project editing tool via commands via `Issues`
+  
+  - `/CHG WORD1 WORD2` # Search and replace
+  
+  - `/PROPHIDE PROP,PROP` # Hides the parameter of parts in the diagram
+  
+  - `/PROPEDIT search_name search_value change_name change_value` # Allows you not only to replace but also to add parameters
 
 - `kicad-order` - System for generating order documents via `Issues`
   
