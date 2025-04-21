@@ -108,6 +108,10 @@ I recommend specifying the exact version of the docker image in the pipeline.
 
 ## Changelog:
 
+### v9.0.2
+
+- Fix asm pdf
+
 ### v9.0.1
 
 - Add PROPHIDE, PROPEDIT in kicad-command
