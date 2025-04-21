@@ -132,9 +132,9 @@ while getopts 'spdgcabil' OPTION; do
         ## ASM
         echo "------------------- ASM [PDF] ------------------- "
         kicad-cli pcb export pdf ${TARGET_DIR}/${KIPRJ_NAME}.kicad_pcb -o ${OUTPUT_DIR}/${NAME}_asm_t.pdf \
-        						 -l 'F.Fab,Edge.Cuts,User.Comments' --cl 'User.Drawings' --cdnp --ev --ibt --black-and-white --drill-shape-opt 0
+        						 -l 'F.Fab,Edge.Cuts' --cl 'User.Drawings' --cdnp --ev --ibt --black-and-white --drill-shape-opt 0
         kicad-cli pcb export pdf ${TARGET_DIR}/${KIPRJ_NAME}.kicad_pcb -o ${OUTPUT_DIR}/${NAME}_asm_b.pdf \
-        						 -l 'B.Fab,Edge.Cuts,User.Comments' --cl 'User.Drawings' --cdnp --ev --ibt --black-and-white --drill-shape-opt 0 -m
+        						 -l 'B.Fab,Edge.Cuts' --cl 'User.Drawings' --cdnp --ev --ibt --black-and-white --drill-shape-opt 0 -m
         ;;
       b)
         ## BOM
